@@ -1,0 +1,26 @@
+$cursorsValues:(alias, all-scroll ,auto ,cell,col-resize,context-menu,copy ,crosshair,default,e-resize,ew-resize ,grab,grabbing ,help ,move ,n-resize,ne-resize ,nesw-resize ,ns-resize ,nw-resize ,nwse-resize ,no-drop ,none ,not-allowed ,pointer ,progress,row-resize ,s-resize ,se-resize ,sw-resize ,text ,w-resize ,wait ,zoom-in ,zoom-out );
+@each $cursor in $cursorsValues {
+  .cursor-#{$cursor} {
+    cursor: #{$cursor}+'!important';
+    cursor: -webkit-+#{$cursor};
+  }
+}
+$percentWidthsImp:(42,50,95,45,48,58,39,95);
+@each $width in $percentWidthsImp {
+  .w-#{$width} {
+    width: #{$width} + '%';
+  }
+}
+$widths: (30,24,25,26,49,40,80,94,96,101,110,120,125,130,140,150,152,250,275,280,180,230,88,30,190,200,300);
+@each $width in $widths {
+  .w-#{$width} {
+    width: #{$width} + 'px';
+  }
+}
+
+$heights:(57vh,52vh,49vh,56vh,75vh,60vh,67vh);
+@each $height in $heights {
+  .h-#{$height} {
+    height: #{$height};
+  }
+}

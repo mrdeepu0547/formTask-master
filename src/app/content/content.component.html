@@ -1,66 +1,12 @@
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-  <div class="container-fluid d-flex justify-content-between text-align-right">
-    <input [(ngModel)]="searchText" placeholder="search here">
-    <button type="text" pButton label="Basic" (click)="op.toggle($event)"><i class="pi pi-filter-fill"></i></button>
-  </div>
-</nav>
-<div class="mx-2 my-2">
-  <button
-  ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>export to excel</button>
-  <table class="table " style="height: calc(90vh - 90px);">
-    <table class="table table-success table-hover table-light">
-      <thead>
-        <tr>
-          <th>Ps Name</th>
-          <th>Home Site</th>
-          <th>MRN</th>
-          <th>SSN</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Zip Code</th>
-          <th>Phone</th>
-          <th>Edit</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let data of psList|filter: searchText; ,let i = index">
-        <tr>
-          <td>{{data.PSName}}</td>
-          <td>{{data.PSId}}</td>
-          <td>{{data.homeSite}}</td>
-          <td>{{data.mrn}}</td>
-          <td>{{data.city}}</td>
-          <td>{{data.state}}</td>
-          <td>{{data.zipCode}}</td>
-          <td>{{data.phone}}</td>
-          <td><button (click)="openModal(data)" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></td>
-        </tr>
-      </tbody>
-    </table>
-  </table>
-</div>
-<div class="d-flex justify-content-between">
-  <button type="button" class="btn btn-primary" (click)="openModalWithClass(template1)">Create</button>
- <div>
-<label class="card-title mr-2">Table size</label>
-<select
-class="form-control-sm"
-[(ngModel)]="pageSize"
-(ngModelChange)="setPageSize()">
-<option *ngFor="let size of paseSizes">{{ size }}</option>
-</select>
-  <button class="btn btn-light" type="button" [disabled]="lowerBound<=0" (click)="onPrevious()">Previous</button>&nbsp;&nbsp;
-  <button class="btn btn-dark" type="button" (click)="onNext()">Next</button>
-</div>
-</div>
-<ng-template #template1>
+
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+    <button type="button" class="btn-close close pull-right" aria-label="Close"  (click)="modalRef?.hide()">
       <span aria-hidden="true" class="visually-hidden">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form class="row m-0" (ngSubmit)="onSubmit()" [formGroup]="personForm">
+    <form class="row m-0" [formGroup]="personForm">
       <div class="col-md-4 col-12">
         <div class="form-group">
           <label id="lastName">Last Name</label>
@@ -279,18 +225,16 @@ class="form-control-sm"
       <div class="col-md-4 col-12">
         <div class="form-group">
           <label id="phoneType">Phone type</label>
-          <select
+          <input
+            type="text"
             class="form-control"
             id="phoneType"
             formControlName="phoneType"
             [ngClass]="{'is-invalid':submitted && personForm.controls.phoneType.errors}" required>
-            <option>--select--</option>
-            <option *ngFor="let item of lookUpsData?.phoneType">{{item.name}}</option>
-          </select>
           <span
             *ngIf="personForm.controls.phoneType && personForm.controls.phoneType.invalid && personForm.controls.phoneType.touched
                   ||submitted && personForm.controls.phoneType.errors" style="color: red;">
-            <p style="font-size: 13px;">Please select an valid Input</p>
+            <p style="font-size: 13px;">Please enter a valid Input</p>
           </span>
         </div>
       </div>
@@ -346,56 +290,40 @@ class="form-control-sm"
       <div class="col-md-4 col-12">
         <div class="form-group">
           <label id="timeZone">Time Zone</label>
-          <select
+          <input
+            type="text"
             class="form-control"
             id="timeZone"
             formControlName="timeZone"
-            [ngClass]="{'is-invalid':submitted && personForm.controls.timeZone.errors}" required>
-            <option>--select--</option>
-            <option value="indian">Indian</option>
-            <option value="europe">Europe</option>
-            <option value="atlantic">Atlantic</option>
-          </select>
+            [ngClass]="{'is-invalid':submitted && personForm.controls.timeZone.errors}" ng-readonly required>
           <span
             *ngIf="personForm.controls.timeZone && personForm.controls.timeZone.invalid && personForm.controls.timeZone.touched
                   ||submitted && personForm.controls.timeZone.errors" style="color: red;">
-            <p style="font-size: 13px;">Please select an valid Input</p>
+            <p style="font-size: 13px;">Please enter a valid Input</p>
           </span>
         </div>
       </div>
       <div class="col-md-4 col-12">
         <div class="form-group">
           <label id="country">Country</label>
-          <select
+          <input
+            type="text"
             class="form-control"
             id="country"
             formControlName="country"
-            [ngClass]="{'is-invalid':submitted && personForm.controls.country.errors}" required>
-            <option>--select--</option>
-            <option value="in">India</option>
-            <option value="us">United States</option>
-            <option value="eu">Europe</option>
-            <option value="uk">United Kingdom</option>
-          </select>
+            [ngClass]="{'is-invalid':submitted && personForm.controls.country.errors}" ng-readonly required>
           <span
             *ngIf="personForm.controls.country && personForm.controls.country.invalid && personForm.controls.country.touched
                   ||submitted && personForm.controls.country.errors" style="color: red;">
-            <p style="font-size: 13px;">Please select an valid Input</p>
+            <p style="font-size: 13px;">Please enter a valid Input</p>
           </span>
         </div>
       </div>
       <nav class="navbar navbar-expand-sm navbar-dark  navbar-fixed-top">
 
         <div class="d-flex ms-auto order-5">
-          <div><button type="submit" class="btn btn-success" (click)="onSubmit()">Save</button></div>
+          <div><button type="submit" class="btn btn-success" (click)="editSubmit()">Save</button></div>
         </div>
       </nav>
     </form>
   </div>
-</ng-template>
-<p-overlayPanel [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"  [style]="{width: '85%',height:'80%'}"
-#op [dismissable]="true" [showCloseIcon]="false">
-  <ng-template pTemplate>
-    <app-overlay-component></app-overlay-component>
-  </ng-template>
-</p-overlayPanel>

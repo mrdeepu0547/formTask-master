@@ -1,0 +1,200 @@
+<div class="modal-body">
+  <form class="row m-0" [formGroup]="personForm">
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">PS Details </legend>
+      <div class="row">
+        <div class="col-lg-3 pt-3">
+          <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" [itemSize]="31" optionValue="id" optionLabel="name"
+              [showClear]="true" class="w-100" [options]="site"
+              styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium" inputId="Site"></p-dropdown>
+            <label for="account" class="AvenirLTStd-Medium f-12">Site/Name Code<span
+                class="text-danger">*</span></label>
+          </span>
+        </div>
+        <div class=" col-lg-3 pt-3">
+          <span class="p-float-label">
+            <input type="text" id="inputtext" styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium"
+              pInputText>
+            <label for="inputtext">PsName</label>
+          </span>
+        </div>
+        <div class="col-lg-3 pt-3">
+          <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" [itemSize]="31" optionValue="id" optionLabel="name"
+              [showClear]="true" class="w-100" [options]="psStatus"
+              styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium" inputId="Site"></p-dropdown>
+            <label for="account" class="AvenirLTStd-Medium f-12">Ps Status<span class="text-danger">*</span></label>
+          </span>
+        </div>
+        <div class=" col-lg-3 pt-3">
+          <span class="p-float-label">
+            <input type="text" id="inputtext" styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium"
+              pInputText>
+            <label for="inputtext">MRN</label>
+          </span>
+        </div>
+        <div class=" col-lg-3 pt-4">
+          <span class="p-float-label">
+            <input type="text" id="inputtext" styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium"
+              pInputText>
+            <label for="inputtext">Account</label>
+          </span>
+        </div>
+        <div class=" col-lg-3 pt-4">
+          <span class="p-float-label">
+            <input type="text" id="inputtext" styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium"
+              pInputText>
+            <label for="inputtext">City</label>
+          </span>
+        </div>
+        <div class="col-lg-3 pt-4">
+          <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" [itemSize]="31" optionValue="id" optionLabel="name"
+              [showClear]="true" class="w-100" [options]="psStatus"
+              styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium" inputId="Site"></p-dropdown>
+            <label for="account" class="AvenirLTStd-Medium f-12">State<span class="text-danger">*</span></label>
+          </span>
+        </div>
+        <div class="col-lg-3 pt-4">
+          <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" [itemSize]="31" optionValue="id" optionLabel="name"
+              [showClear]="true" class="w-100" [options]="psStatus"
+              styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium" inputId="Site"></p-dropdown>
+            <label for="account" class="AvenirLTStd-Medium f-12">Co-Ordinator<span class="text-danger">*</span></label>
+          </span>
+        </div>
+        <div class=" col-lg-3 pt-4">
+          <span class="p-float-label">
+            <input type="text" id="inputtext" styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium"
+              pInputText>
+            <label for="inputtext">ZipCode</label>
+          </span>
+        </div>
+        <div class=" col-lg-3 pt-4">
+          <span class="p-float-label">
+            <input type="text" id="inputtext" styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium"
+              pInputText>
+            <label for="inputtext">Phone</label>
+          </span>
+        </div>
+        <div class=" col-lg-3 pt-4">
+          <span class="p-float-label">
+            <input type="text" id="inputtext" styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium"
+              pInputText>
+            <label for="inputtext">SSN</label>
+          </span>
+        </div>
+        <div class="col-lg-3 pt-4">
+          <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" [itemSize]="31" optionValue="id" optionLabel="name"
+              [showClear]="true" class="w-100" [options]="psStatus"
+              styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium" inputId="Site"></p-dropdown>
+            <label for="account" class="AvenirLTStd-Medium f-12">Case Manager<span class="text-danger">*</span></label>
+          </span>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">PS Details </legend>
+      <div class="row">
+        <div class="col-3 w-120">
+          <div class=" form-input  mb-0 pt-4">
+            <span class="p-float-label">
+              <input type="text" inputId="first_name" bsDatepicker placeholder="MM/DD/YYYY"
+                class="bg-light-grey input-shadow w-100 " pInputText>
+              <label for="inputtext" class="AvenirLTStd-Medium">
+               Admission Start Date </label>
+            </span>
+          </div>
+        </div>
+        <div class="col-3 w-120">
+          <div class=" form-input  mb-0 pt-4">
+            <span class="p-float-label">
+              <input type="text" inputId="first_name" bsDatepicker placeholder="MM/DD/YYYY"
+                class="bg-light-grey input-shadow w-100 " pInputText>
+              <label for="inputtext" class="AvenirLTStd-Medium">
+                Admission  End Date </label>
+            </span>
+          </div>
+        </div>
+        <div class="col-3 w-120">
+          <div class=" form-input  mb-0 pt-4">
+            <span class="p-float-label">
+              <input type="text" inputId="first_name" bsDatepicker placeholder="MM/DD/YYYY"
+                class="bg-light-grey input-shadow w-100 " pInputText>
+              <label for="inputtext" class="AvenirLTStd-Medium">
+               Discharge Start Date </label>
+            </span>
+          </div>
+        </div>
+        <div class="col-3 w-120">
+          <div class=" form-input  mb-0 pt-4">
+            <span class="p-float-label">
+              <input type="text" inputId="first_name" bsDatepicker placeholder="MM/DD/YYYY"
+                class="bg-light-grey input-shadow w-100 " pInputText>
+              <label for="inputtext" class="AvenirLTStd-Medium">
+                Discharge End Date </label>
+            </span>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">PS Authorization </legend>
+      <div class="row">
+        <div class="col-3 w-120">
+          <div class=" form-input  mb-0 pt-4 ">
+            <span class="p-float-label">
+              <input type="text" inputId="first_name" bsDatepicker placeholder="MM/DD/YYYY"
+                class="bg-light-grey input-shadow w-100 " pInputText>
+              <label for="inputtext" class="AvenirLTStd-Medium">
+               Service Start Date </label>
+            </span>
+          </div>
+        </div>
+        <div class="col-3 w-120">
+          <div class=" form-input  mb-0  pt-4 ">
+            <span class="p-float-label">
+              <input type="text" inputId="first_name" bsDatepicker placeholder="MM/DD/YYYY"
+                class="bg-light-grey input-shadow w-100 " pInputText>
+              <label for="inputtext" class="AvenirLTStd-Medium">
+                Service End Date </label>
+            </span>
+          </div>
+        </div>
+        <div class="col-lg-3 pt-4 ">
+          <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" [itemSize]="31" optionValue="id" optionLabel="name"
+              [showClear]="true" class="w-100" [options]="psStatus"
+              styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium" inputId="Site"></p-dropdown>
+            <label for="account" class="AvenirLTStd-Medium f-12">Service<span class="text-danger">*</span></label>
+          </span>
+        </div>
+        <div class=" col-lg-3 pt-4 ">
+          <span class="p-float-label">
+            <input type="text" id="inputtext" styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium"
+              pInputText>
+            <label for="inputtext">Authorization#</label>
+          </span>
+        </div>
+        <div class="col-lg-3 pt-4 ">
+          <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" [itemSize]="31" optionValue="id" optionLabel="name"
+              [showClear]="true" class="w-100" [options]="psStatus"
+              styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium" inputId="Site"></p-dropdown>
+            <label for="account" class="AvenirLTStd-Medium f-12">Payor/Plan<span class="text-danger">*</span></label>
+          </span>
+        </div>
+        <div class="col-lg-3 pt-4 ">
+          <span class="p-float-label">
+            <p-dropdown [autoDisplayFirst]="false" [itemSize]="31" optionValue="id" optionLabel="name"
+              [showClear]="true" class="w-100" [options]="psStatus"
+              styleClass="w-100 input-shadow bg-light-grey AvenirLTStd-Medium" inputId="Site"></p-dropdown>
+            <label for="account" class="AvenirLTStd-Medium f-12">Authorization Status<span class="text-danger">*</span></label>
+          </span>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

@@ -1,0 +1,27 @@
+<p>table works!</p>
+<div>
+  <table class="table ">
+    <thead>
+      <tr>
+      <th>Title</th>
+      <th>Lastname</th>
+      <th>Firstname</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let d of user ,let i = index">
+      <tr>
+      <td>{{d.title}}</td>
+      <td>{{d.lastName}}</td>
+      <td>{{d.firstName}}</td>
+      <td>{{d.email}}</td>
+      <td>{{d.password}}</td>
+      <td><button (click)="onEdit(i)"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+      <td><button (click)="onDelete(d.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+     </tr>
+    </tbody>
+  </table>
+</div>
