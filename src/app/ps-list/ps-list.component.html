@@ -1,0 +1,400 @@
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid d-flex justify-content-between text-align-right">
+    <input [(ngModel)]="searchText" placeholder="search here">
+    <button type="text" pButton label="Basic" (click)="op.toggle($event)"><i class="pi pi-filter-fill"></i></button>
+  </div>
+</nav>
+<div class="mx-2 my-2">
+  <button (click)="downloadExcel()" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>export to excel</button>
+  <table class="table " style="height: calc(90vh - 90px);">
+    <table class="table table-success table-hover table-light">
+      <thead>
+        <tr>
+          <th>Ps Name</th>
+          <th>Home Site</th>
+          <th>MRN</th>
+          <th>SSN</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zip Code</th>
+          <th>Phone</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let data of psList|filter: searchText; ,let i = index">
+        <tr>
+          <td>{{data.PSName}}</td>
+          <td>{{data.PSId}}</td>
+          <td>{{data.homeSite}}</td>
+          <td>{{data.mrn}}</td>
+          <td>{{data.city}}</td>
+          <td>{{data.state}}</td>
+          <td>{{data.zipCode}}</td>
+          <td>{{data.phone}}</td>
+          <td><button (click)="openModal(data)" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </table>
+</div>
+<div class="d-flex justify-content-between">
+  <button type="button" class="btn btn-primary" (click)="openModalWithClass(template1)">Create</button>
+ <div>
+<label class="card-title mr-2">Table size</label>
+<select
+class="form-control-sm"
+[(ngModel)]="pageSize"
+(ngModelChange)="setPageSize()">
+<option *ngFor="let size of paseSizes">{{ size }}</option>
+</select>
+  <button class="btn btn-light" type="button" [disabled]="lowerBound<=0" (click)="onPrevious()">Previous</button>&nbsp;&nbsp;
+  <button class="btn btn-dark" type="button" (click)="onNext()">Next</button>
+</div>
+</div>
+<ng-template #template1>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="row m-0" (ngSubmit)="onSubmit()" [formGroup]="personForm">
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="lastName">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            formControlName="lastName">
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="firstName">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            formControlName="firstName"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.firstName.errors}" required>
+          <span
+            *ngIf="personForm.controls.firstName && personForm.controls.firstName.invalid && personForm.controls.firstName.touched
+                  || submitted && personForm.controls.firstName.errors" style="color: red;">
+            <p style="font-size: 13px;">Please enter an valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="gender">Gender</label>
+          <select
+            class="form-control"
+            id="gender"
+            formControlName="gender"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.gender.errors}" required>
+            <option>--select--</option>
+            <option *ngFor="let item of lookUpsData?.gender"[value]="item.id">{{item.name}}</option>
+          </select>
+          <span
+            *ngIf="personForm.controls.gender && personForm.controls.gender.invalid && personForm.controls.gender.touched
+                  || submitted && personForm.controls.gender.errors" style="color: red;">
+            <p style="font-size: 13px;">Please select an valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="salutation">Salutation</label>
+          <select
+            class="form-control"
+            id="salutation"
+            formControlName="salutation"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.salutation.errors}" required>
+            <option>--select--</option>
+            <option *ngFor="let item of lookUpsData?.salutation"[value]="item.id">{{item.name}}</option>
+          </select>
+          <span
+            *ngIf="personForm.controls.salutation && personForm.controls.salutation.invalid && personForm.controls.salutation.touched
+                  || submitted && personForm.controls.salutation.errors" style="color: red;">
+            <p style="font-size: 13px;">Please select an valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="maritialStatus">Marital Status</label>
+          <select
+            class="form-control"
+            id="maritialStatus"
+            formControlName="maritialStatus"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.maritialStatus.errors}" required>
+            <option>--select--</option>
+            <option *ngFor="let item of lookUpsData?.maritialStatus"[value]="item.id">{{item.name}}</option>
+          </select>
+          <span
+            *ngIf="personForm.controls.maritialStatus && personForm.controls.maritialStatus.invalid && personForm.controls.maritialStatus.touched
+                  || submitted && personForm.controls.maritialStatus.errors" style="color: red;">
+            <p style="font-size: 13px;">Please select an valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="dateOfBirth">Date Of Birth</label>
+          <input
+            type="date|date:'mm/dd/yyyy'"
+            class="form-control"
+            id="dateOfBirth"
+            placeholder="MM/DD/YYYY"
+            formControlName="dateOfBirth"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.dateOfBirth.errors}" required>
+          <span
+            *ngIf="personForm.controls.dateOfBirth && personForm.controls.dateOfBirth.invalid && personForm.controls.dateOfBirth.touched
+                  || submitted && personForm.controls.dateOfBirth.errors" style="color: red;">
+            <p style="font-size: 13px;">Please select a valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="race">Race</label>&nbsp;
+          <select
+            class="form-control"
+            id="race"
+            formControlName="race"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.race.errors}" required>
+            <option>--select--</option>
+            <option *ngFor="let item of lookUpsData?.race"[value]="item.id">{{item.name}}</option>
+          </select>
+          <span
+            *ngIf="personForm.controls.race && personForm.controls.race.invalid && personForm.controls.race.touched
+                  || submitted && personForm.controls.race.errors" style="color: red;">
+            <p style="font-size: 13px;">Please select an valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="ssn">SSN</label>
+          <input
+            type="text"
+            class="form-control"
+            id="ssn"
+            formControlName="ssn"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.ssn.errors}" required>
+          <span
+            *ngIf="personForm.controls.ssn && personForm.controls.ssn.invalid && personForm.controls.ssn.touched
+                  || submitted && personForm.controls.ssn.errors" style="color: red;">
+            <p style="font-size: 13px;">Please enter a valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="language">Primary Language</label>&nbsp;
+          <select
+            class="form-control"
+            id="language"
+            formControlName="language"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.language.errors}" required>
+            <option>--select--</option>
+            <option *ngFor="let item of lookUpsData?.language"[value]="item.sortOrder">{{item.name}}</option>
+          </select>
+          <span
+            *ngIf="personForm.controls.language && personForm.controls.language.invalid && personForm.controls.language.touched
+                  || submitted && personForm.controls.language.errors" style="color: red;">
+            <p style="font-size: 13px;">Please select an valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="addressType">AddressType</label>
+          <select
+            class="form-control"
+            id="addressType"
+            formControlName="addressType"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.addressType.errors}" required>
+            <option>--select--</option>
+            <option *ngFor="let item of lookUpsData?.addressType">{{item.name}}</option>
+          </select>
+          <span
+            *ngIf="personForm.controls.addressType && personForm.controls.addressType.invalid && personForm.controls.addressType.touched
+                  ||submitted && personForm.controls.addressType.errors" style="color: red;">
+            <p style="font-size: 13px;">Please select an valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="addressline1">Address Line #1</label>
+          <input
+            type="text"
+            class="form-control"
+            id="addressLine1"
+            formControlName="addressLine1"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.addressLine1.errors}" required>
+          <span
+            *ngIf="personForm.controls.addressLine1 && personForm.controls.addressLine1.invalid && personForm.controls.addressLine1.touched
+                  ||submitted && personForm.controls.addressLine1.errors" style="color: red;">
+            <p style="font-size: 13px;">Please enter a valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="addressline2">Address Line #2</label>
+          <input
+            type="text"
+            class="form-control"
+            id="addressLine2"
+            formControlName="addressLine2"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.addressLine2.errors}" required>
+          <span
+            *ngIf="personForm.controls.addressLine2 && personForm.controls.addressLine2.invalid && personForm.controls.addressLine2.touched
+                  ||submitted && personForm.controls.addressLine2.errors" style="color: red;">
+            <p style="font-size: 13px;">Please enter a valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="zipCode">Zip Code</label>
+          <input
+            type="number"
+            class="form-control"
+            id="zipCode"
+            formControlName="zipCode"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.zipCode.errors}" required>
+          <span
+            *ngIf="personForm.controls.zipCode && personForm.controls.zipCode.invalid && personForm.controls.zipCode.touched
+                  ||submitted && personForm.controls.zipCode.errors" style="color: red;">
+            <p style="font-size: 13px;">Please enter a valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="phoneType">Phone type</label>
+          <select
+            class="form-control"
+            id="phoneType"
+            formControlName="phoneType"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.phoneType.errors}" required>
+            <option>--select--</option>
+            <option *ngFor="let item of lookUpsData?.phoneType">{{item.name}}</option>
+          </select>
+          <span
+            *ngIf="personForm.controls.phoneType && personForm.controls.phoneType.invalid && personForm.controls.phoneType.touched
+                  ||submitted && personForm.controls.phoneType.errors" style="color: red;">
+            <p style="font-size: 13px;">Please select an valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="phone">Phone</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="form-control"
+            formControlName="phone"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.phone.errors}" required>
+          <span
+            *ngIf="personForm.controls.phone && personForm.controls.phone.invalid && personForm.controls.phone.touched
+                  ||submitted && personForm.controls.phone.errors" style="color: red;">
+            <p style="font-size: 13px;">Please enter a valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="city">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            formControlName="city"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.city.errors}" required>
+          <span
+            *ngIf="personForm.controls.city && personForm.controls.city.invalid && personForm.controls.city.touched
+                  ||submitted && personForm.controls.city.errors" style="color: red;">
+            <p style="font-size: 13px;">Please enter a valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="state">State</label>
+          <input
+            type="text"
+            class="form-control"
+            id="state"
+            formControlName="state"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.state.errors}" required>
+          <span
+            *ngIf="personForm.controls.state && personForm.controls.state.invalid && personForm.controls.state.touched
+                  ||submitted && personForm.controls.state.errors" style="color: red;">
+            <p style="font-size: 13px;">Please enter a valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="timeZone">Time Zone</label>
+          <select
+            class="form-control"
+            id="timeZone"
+            formControlName="timeZone"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.timeZone.errors}" required>
+            <option>--select--</option>
+            <option value="indian">Indian</option>
+            <option value="europe">Europe</option>
+            <option value="atlantic">Atlantic</option>
+          </select>
+          <span
+            *ngIf="personForm.controls.timeZone && personForm.controls.timeZone.invalid && personForm.controls.timeZone.touched
+                  ||submitted && personForm.controls.timeZone.errors" style="color: red;">
+            <p style="font-size: 13px;">Please select an valid Input</p>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="form-group">
+          <label id="country">Country</label>
+          <select
+            class="form-control"
+            id="country"
+            formControlName="country"
+            [ngClass]="{'is-invalid':submitted && personForm.controls.country.errors}" required>
+            <option>--select--</option>
+            <option value="in">India</option>
+            <option value="us">United States</option>
+            <option value="eu">Europe</option>
+            <option value="uk">United Kingdom</option>
+          </select>
+          <span
+            *ngIf="personForm.controls.country && personForm.controls.country.invalid && personForm.controls.country.touched
+                  ||submitted && personForm.controls.country.errors" style="color: red;">
+            <p style="font-size: 13px;">Please select an valid Input</p>
+          </span>
+        </div>
+      </div>
+      <nav class="navbar navbar-expand-sm navbar-dark  navbar-fixed-top">
+
+        <div class="d-flex ms-auto order-5">
+          <div><button type="submit" class="btn btn-success" (click)="onSubmit()">Save</button></div>
+        </div>
+      </nav>
+    </form>
+  </div>
+</ng-template>
+<p-overlayPanel [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"  [style]="{width: '85%',height:'80%'}"
+#op [dismissable]="true" [showCloseIcon]="false">
+  <ng-template pTemplate>
+    <app-overlay-component></app-overlay-component>
+  </ng-template>
+</p-overlayPanel>
